@@ -1,7 +1,8 @@
 set nocompatible
+filetype off
 
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
 
 " Plugins
 Bundle 'gmarik/vundle'
@@ -11,26 +12,35 @@ Bundle 'mileszs/ack.vim'
 Bundle 'vim-scripts/ZoomWin'
 Bundle 'ervandew/supertab'
 Bundle 'tpope/vim-endwise'
-Bundle 'scrooloose/syntastic'
+" Bundle 'scrooloose/syntastic'
+Bundle 'w0rp/ale'
 Bundle 'Lokaltog/vim-easymotion'
 Bundle 'kien/ctrlp.vim'
-Bundle 'tsaleh/vim-matchit'
+Bundle 'tmhedberg/matchit'
 
 " Syntaxes
 Bundle 'vim-ruby/vim-ruby'
 Bundle 'tpope/vim-rails'
 Bundle 'tpope/vim-markdown'
-Bundle 'kchmck/vim-coffee-script'
 Bundle 'groenewege/vim-less'
 Bundle 'pangloss/vim-javascript'
-Bundle 'bbommarito/vim-slim'
+Bundle 'mxw/vim-jsx'
 Bundle 'toyamarinyon/vim-swift'
 Bundle 'fatih/vim-go'
 Bundle 'othree/yajs.vim'
+Bundle 'wavded/vim-stylus'
+Bundle 'leafgarland/typescript-vim'
+" Bundle 'Quramy/tsuquyomi'
 
 " Color schemes
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'baeuml/summerfruit256.vim'
+
+call vundle#end()
+
+filetype on
+filetype indent on
+filetype plugin on
 
 " Custom Settings
 set expandtab
@@ -42,13 +52,9 @@ set number            " Show line numbers
 set ruler             " Show line and column number
 syntax enable         " Turn on syntax highlighting allowing local overrides
 set encoding=utf-8    " Set default encoding to UTF-8
-
-filetype on
-filetype indent on
-filetype plugin on
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
-map <Leader>n :NERDTreeToggle<CR>
+map <Leader>t :NERDTreeToggle<CR>
 map <Leader>z :ZoomWin<CR>
 
 set list
@@ -96,13 +102,39 @@ map <Up> gk
 let g:ctrlp_match_window_bottom = 1
 let g:ctrlp_match_window_reversed = 0
 let g:ctrlp_max_height = 10
+let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
 let g:ctrlp_custom_ignore = {
-  \ 'dir': '\v[\/](.git|.hg|.svn|node_modules)$',
+  \   'dir': '\v[\/](.git|.hg|.svn|node_modules|tmp)$',
   \ }
 
 set background=dark
 colorscheme solarized
 
 let g:syntastic_java_checker = 'checkstyle'
+let g:jsx_ext_required = 0
+
+let g:ale_completion_enabled = 0
+let g:ale_fix_on_save = 1
+let g:ale_fixers = {
+  \   'javascript': [
+  \     'prettier',
+  \   ],
+  \   'typescript': [
+  \     'prettier',
+  \   ],
+  \}
+
+let g:ale_linters = {
+  \   'typescript': [
+  \     'tslint', 'tsserver'
+  \   ],
+  \}
+
+let g:ale_javascript_prettier_use_local_config = 1
 
 let not_loaded_cscope=1
+
+let $PATH=$PATH . ':/Users/eeyore/.nvm/versions/node/v9.2.0/bin'
+
+set exrc
+set secure
