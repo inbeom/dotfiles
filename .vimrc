@@ -30,6 +30,7 @@ Bundle 'fatih/vim-go'
 Bundle 'othree/yajs.vim'
 Bundle 'wavded/vim-stylus'
 Bundle 'leafgarland/typescript-vim'
+Bundle 'jparise/vim-graphql'
 " Bundle 'Quramy/tsuquyomi'
 
 " Color schemes
@@ -117,16 +118,25 @@ let g:ale_completion_enabled = 0
 let g:ale_fix_on_save = 1
 let g:ale_fixers = {
   \   'javascript': [
-  \     'prettier',
+  \     'eslint', 'prettier',
+  \   ],
+  \   'javascriptreact': [
+  \     'eslint', 'prettier',
   \   ],
   \   'typescript': [
-  \     'prettier',
+  \     'eslint', 'prettier',
+  \   ],
+  \   'typescriptreact': [
+  \     'eslint', 'prettier',
+  \   ],
+  \   'json': [
+  \     'eslint', 'prettier',
   \   ],
   \}
 
 let g:ale_linters = {
   \   'typescript': [
-  \     'tslint', 'tsserver'
+  \     'eslint', 'tsserver', 'prettier',
   \   ],
   \}
 
@@ -134,7 +144,7 @@ let g:ale_javascript_prettier_use_local_config = 1
 
 let not_loaded_cscope=1
 
-let $PATH=$PATH . ':/Users/eeyore/.nvm/versions/node/v9.2.0/bin'
+let $PATH=$PATH . ':/Users/inbeom/.nvm/versions/node/v18.11.0/bin'
 
 set exrc
 set secure
